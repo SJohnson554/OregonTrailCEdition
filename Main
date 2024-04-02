@@ -1,0 +1,947 @@
+//Sam Johnson | ITT310 | 11/1/2022
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <windows.h>										//allows for Sleep(); funciton
+#include <math.h>											//Allows for random number generation
+//Function calls START
+void inapp();												//Allows for user to Exit or Start the Game
+void exitapp();												//Ends program
+int mainmenu(int x);										//Menu that appears after successfull login
+void continue1();											//Prompts user to either watch credits, Continue Game, or Leave
+void continue2();											//Game Introduction
+void login();												//Locks code until successfull credentials are presented
+void credits();												//Provides credits for game creators
+void mainpath();											//Branched Path (Main Path)
+void lesserknownpath();										//Branched Path (Lesser Known Path)
+void mountain();
+void checkpoint1();
+void badlands();
+void badlands2();
+void mesa();
+void mesa2();
+void mesa3();
+void desert();
+void checkpoint2();
+void checkpoint1deathscreen();
+void randomevent1();
+void randomevent2();
+void randomevent3();
+void randomevent4();
+void randomevent5();
+void randomevent6();
+void randomevent7();
+void randomevent8();
+void randomEventMountain1();
+void randomEventMountain2();
+void randomEventMountain3();
+void randomEventMountain4();
+void randomEventBadlands1();
+void randomEventBadlands2();
+void randomEventBadlands3();
+void randomEventBadlands4();
+void randomEventBadlands5();
+void randomEventCrackJump1();
+void randomEventCrackJump2();
+void randomEventCrackJump3();
+void randomEventAroundCrack1();
+void randomEventAroundCrack2();
+void randomEventAroundCrack3();
+void randomEventAroundCrack4();
+void randomEventMesa1();
+void randomEventMesa2();
+void randomEventMesa3();
+void randomEventMesa4();
+void randomEventMesa5();
+void randomEventStampede1();
+void randomEventStampede2();
+void randomEventStampede3();
+void randomEventStampede4();
+void randomEventStampede5();
+void randomEventRiverFord1();
+void randomEventRiverFord2();
+void randomEventRiverFord3();
+void randomEventRiverFord4();
+void randomEventGenerator();								//Chooses random event
+void randomEventGeneratorMountain();						//Chooses random Mountain Event
+void randomEventGeneratorBadlands();
+void randomEventGeneratorCrackJump();
+void randomEventGeneratorAroundCrack();
+void randomEventGeneratorMesa1();
+void randomEventGeneratorMesa2();
+void randomEventGeneratorStampede1();
+void randomEventGeneratorStampede2();
+void randomEventGeneratorRiverFord();
+
+
+
+
+int menu = 0;
+
+int main() {
+	login();
+}
+
+
+void login() {
+	int login_result_user;
+	int login_result_pass;
+	char* username;
+	username = (char*)malloc(80 * sizeof(char));
+	char* password;
+	password = (char*)malloc(80 * sizeof(char));
+	system("cls");
+	printf("Enter username: ");
+	gets_s(username, 80);									//scan for username
+	printf("Enter password: ");
+	gets_s(password, 80);									//scan for password
+
+	login_result_user = strcmp(username, "sjohnson");		//username is sjohnson
+	login_result_pass = strcmp(password, "sjohnson");		//password is sjohnson
+
+	if ((login_result_user == 0 && login_result_pass == 0)) {		//if the entered values are equall to the predetermined values, continue to the menu
+		mainmenu(1);
+	}
+	else {															//if the entered values are equal to the predetermiend values, clear console, and request to try again
+		system("cls");
+		printf("Username or password incorrect, please try again.");
+		Sleep(2000);
+		login();
+	}
+	free(username);
+	free(password);
+}
+
+int mainmenu(int x) {
+	int menumain = x;
+	system("cls");																										 //clear the console 
+	printf("Welcome to the app! \n____________________________\n\n Enter 1 to continue \n Enter 0 to exit\n ");
+	scanf_s("%d", &menumain);																							//scans for single digit input
+
+	if (menumain == 1) {																								//If they enter 1, the game begins
+		inapp();
+	}
+	else {																												//If they enter any other character, the code will end
+		exitapp();
+	}
+}
+
+void inapp() {
+	int menuin;
+	system("cls");																										//clear console
+	printf("You are in the program\n\n0 to exit \n1 to continue \n2 to return to Main Menu\n");
+	scanf_s("%d", &menuin);																								//scan for a single digit input
+	if (menuin == 1) {																									//if 1, continue the game
+		continue1();
+	}
+	else if (menuin == 2) {																								//if 2, return to main menue
+		mainmenu(1);
+	}
+	else {																												//if any other character, the code will end
+		exitapp();
+	}
+}
+
+void continue1() {
+	int menuecontinue;
+	printf("Please increase size of console window for best experience\n");
+	Sleep(6000);
+	system("cls");																										//clear console
+	printf("      * ***                                                                      ****           *                                 ***     \n    *  ****                                                                     *  *************                            *      ***    \n   *  *  ***                                                                   *     *********                             ***      **    \n  *  **   ***                                                                  *     *  *                                   *       **    \n *  ***    *** ***  ****                               ****                     **  *  **         ***  ****                         **    \n**   **     **  **** **** *    ***        ****        * ***  * ***  ****           *  ***          **** **** *    ****    ***       **    \n**   **     **   **   ****    * ***      *  ***  *   *   ****   **** **** *       **   **           **   ****    * ***  *  ***      **    \n**   **     **   **          *   ***    *    ****   **    **     **   ****        **   **           **          *   ****    **      **    \n**   **     **   **         **    ***  **     **    **    **     **    **         **   **           **         **    **     **      **    \n**   **     **   **         ********   **     **    **    **     **    **         **   **           **         **    **     **      **    \n **  **     **   **         *******    **     **    **    **     **    **          **  **           **         **    **     **      **    \n  ** *      *    **         **         **     **    **    **     **    **           ** *      *     **         **    **     **      **    \n   ***     *     ***        ****    *  **     **     ******      **    **            ***     *      ***        **    **     **      **    \n    *******       ***        *******    ********      ****       ***   ***            *******        ***        ***** **    *** *   *** * \n      ***                     *****       *** ***                 ***   ***             ***                      ***   **    ***     ***  \n                                               ***\n                                         ****   ***\n                                       *******  **\n                                      *     ****\n");
+	printf("press 0 for credits\n press 1 for main game \n press 2 to exit\n");
+	scanf_s("%d", &menuecontinue);																						//scan for single digit input
+	if (menuecontinue == 1) {																							//If 1, continue the game
+		continue2();
+	}
+	else if (menuecontinue == 0) {																						//If 0, roll credits
+		credits();
+	}
+	else {																												//If any other character, the code will end
+		exitapp();
+	}
+
+}
+
+void continue2() {
+	int pathchoice;
+	system("cls");																										//clear console
+	printf("                             ^\n                _______     ^^^\n               |xxxxxxx|  _^^^^^_\n               |xxxxxxx| | [][]  |\n            ______xxxxx| |[][][] |\n           |++++++|xxxx| | [][][]|\n           |++++++|xxxx| |[][][] |\n           |++++++|_________ [][]|\n           |++++++|=|=|=|=|=| [] |\n         |++++++|=|=|=|=|=|[][]|\n___________|++HH++|  _HHHH__|   _________   _________  ________\n         _______________   ______________      ______________\n__________________  ___________    __________________    ___________\n\n");
+	printf("Your journey begins in Independence Missouri\n");
+	Sleep(2000);
+	printf("You and your family have packed your wagon and fed your oxen and start the trek to Oregon\n");
+	Sleep(3000);
+	printf("You reach the outskirts of the city, do you take the main path, or trek the lesser known trail?\nEnter 1 for Main Path\nEnter 2 for Lesser Known Trail\n");
+	scanf_s("%d", &pathchoice);																							//scan for single digit input
+	if (pathchoice == 1) {																								//If 1, path branches (chose main path)
+		printf("You have chosen to go down the main path\n");
+		Sleep(2000);
+		mainpath();
+	}
+	else if (pathchoice == 2) {																							//If 2, path branches (chose lesser known path)
+		printf("You have chosen to go down the lesser known path\n");
+		Sleep(2000);
+		lesserknownpath();
+	}
+	else {																												//prompts user to re-enter an accepted value
+		printf("Please pick 1 or 2\n");
+		Sleep(2000);
+		continue2();
+	}
+}
+
+void mainpath() {
+	Sleep(3000);
+	randomEventGenerator();																								//Randomly chooses calamity
+}
+
+void lesserknownpath() {
+	Sleep(3000);
+	randomEventGenerator();																								//Randomly chooses calamity
+}
+
+void mountain() {
+	int ready;
+	system("cls");
+	printf(" ,'-.        \n(____*.      \n          \n       ,-.\n      /-.,\\ \n     /     \\ \n ___/_______\\ \n");
+	printf("You approach a looming mountian in the distance.\n");
+	Sleep(1000);
+	printf("You decide to rest for the night\n");
+	printf(".");
+	Sleep(1500);
+	printf(".");
+	Sleep(1500);
+	printf(".\n");
+	Sleep(1500);
+	printf("Morning comes and you are ready to trek the mountain\n");
+	Sleep(2000);
+	printf("Are you ready to hike up the mountain?\n 1 = Yes\n 2 = No\n");
+	scanf_s("%d", &ready);
+	if (ready == 1) {
+		randomEventGeneratorMountain();
+	}
+	else if (ready == 2) {
+		printf("You chicken out and go back to Independence\n");
+		Sleep(3000);
+		continue2();
+	}
+	else {
+		printf("Please pick 1 or 2");
+		Sleep(2000);
+		mountain();
+	}
+}
+void checkpoint1() {
+	int Badlands;
+	system("cls");
+	printf("  {^}\n  |#|\n |===|\n  |0|\n  | |\n =====\n_||_||_\n");
+	printf("You have reached Fort Bridger\n");
+	printf("This is your first Checkpoint!\n");
+	Sleep(2000);
+	printf("From now on, death will bring you back to here.\n");
+	Sleep(2000);
+	printf("You restock, get some well deserved rest and prepare to hit the trail once again.\n");
+	Sleep(2000);
+	printf("You find a map within the fort with two possible options\n1: Risk a trek through the Badlands and possibly make it to your destination faster\n2: Go around the badlands and through the Mesas\n");
+	scanf_s("%d", &Badlands);
+	if (Badlands == 1) {
+		printf("You have chosen to continue your expedition through the badlands\n");
+		Sleep(3000);
+		badlands();
+	}
+	else if (Badlands == 2) {
+		printf("You have chosen to take the longhaul around the Badlands into the Mesa\n");
+		Sleep(3000);
+		mesa();
+	}
+	else {
+		printf("Please pick 1 or 2");
+		Sleep(2000);
+		checkpoint1();
+	}
+}
+
+void badlands() {
+	printf("The stench of sulfur fills your lungs as you enter the badlands.\n");
+	Sleep(2000);
+	printf("You look around and notice that the trail has disappeared!\n");
+	Sleep(2000);
+	printf("You are now in unknown territory\n");
+	Sleep(4000);
+	randomEventGeneratorBadlands();
+}
+void badlands2() {
+	int crack;
+	printf("As you continue through the badlands you notice geysers spouting off around you.\n");
+	Sleep(2000);
+	printf("And all of a sudden, the ground starts to rumble!\n");
+	Sleep(2000);
+	printf("You tell your oxen to put it in full gear!\n");
+	Sleep(2000);
+	printf("THE GROUND BREAKS UP UNDERNEATH YOU!!\n");
+	Sleep(2000);
+	printf("Will you attempt to jump the crack, or go around ? \n");
+	Sleep(2000);
+	printf("1 = Jump the crack\n2 = Go around");
+	scanf_s("%d", &crack);
+	if (crack == 1) {
+		printf("You have chosen to jump the crack\n");
+		Sleep(2000);
+		randomEventGeneratorCrackJump();
+	}
+	else if (crack == 2) {
+		printf("You have chosen to go around the crack");
+		Sleep(2000);
+		randomEventGeneratorAroundCrack();
+	}
+	else {
+		printf("Please pick 1 or 2");
+		Sleep(2000);
+		badlands2();
+	}
+}
+void mesa() {
+	printf("You start to notice the landscape change as mountainous plateaus appear on all sides with bright red and orange rocks layering the horizon\n");
+	Sleep(3000);
+	printf("You continue to follow the trail and think to yourself how silly it would've been to try to go through the badlands\n");
+	Sleep(5000);
+	randomEventGeneratorMesa1();
+}
+void mesa2() {
+	system("cls");
+	printf("As you continue through the mesa you notice carvings in the sides of the stone\nSigns of an ancient people scribbled for miles\n");
+	Sleep(5000);
+	randomEventGeneratorMesa2();
+}
+void mesa3() {
+	system("cls");
+	int stampede;
+	printf("You are reaching the end of the mesa when you notice a blurry dark spot in the distance\n");
+	Sleep(2000);
+	printf("As you approch you notice that it is a pack of buffalo\n");
+	Sleep(2000);
+	printf("Before you can attempt to turn around, the buffalo start to stampede!\n");
+	Sleep(2000);
+	printf("What will you do?\n1: Force your cart off the trail to try to dodge to stampede\n2: Attempt to hide your cart behind a large boulder\n3: Stay on the path and hope they avoid you\n");
+	scanf_s("%d", &stampede);
+	if (stampede == 1) {
+		printf("You have chosen to run off the trail\n");
+		Sleep(4000);
+		randomEventGeneratorStampede1();
+	}
+	else if (stampede == 2) {
+		printf("You have chosen to hide your cart behind a boulder nearby\n");
+		Sleep(4000);
+		randomEventGeneratorStampede2();
+	}
+	else if (stampede == 3) {
+		printf("You decide to stay on the path\n");
+		Sleep(3000);
+		printf("The stampede runs straight through you, your oxen and your cart\n");
+		Sleep(2000);
+		checkpoint1deathscreen();
+	}
+	else {
+		printf("Please pick 1, 2, or 3");
+		mesa3();
+	}
+}
+void desert() {
+	int riverford;
+	printf("You enter the desert\n");
+	Sleep(2000);
+	printf("Inside the desert you find an oasis with a river running on both sides\n");
+	printf("__________________________________________________________________\n -          -         -       -      -    / '  '. ` ` \\    -    -\n      --                  --       --   /    '  . `   ` \\    --\n---            ---          ---       /  '                \\ ---\n     ----               ----        /       ' ' .    ` `    \\  ----\n-----         -----         ----- /   '   '        `      `   \\ \n     .-~~-.          ------     /          '    . `     `    `  \\ \n");
+	Sleep(3000);
+	printf("You will need to ford the river continue your journey\n");
+	Sleep(3000);
+	printf("Will you attempt to ford the river now or wait till the evening?\n1 to ford the river now\n2 to ford the river in the evening\n");
+	scanf_s("%d", &riverford);
+	if (riverford == 1) {
+		printf("You have decided to attempt to ford the river now.\n");
+		Sleep(3000);
+		printf("The river is very active and it causes your cart to be caught in the current\n");
+		Sleep(4000);
+		checkpoint1deathscreen();
+	}
+	else if (riverford == 2) {
+		printf("You have decided to wait for the river to calm down before crossing\n");
+		Sleep(3000);
+		randomEventGeneratorRiverFord();
+	}
+	else {
+		printf("Please pick 1 or 2");
+		Sleep(2000);
+		desert();
+	}
+}
+void checkpoint2() {
+	int playagain;
+	printf("You have made it to Oregon!\n");
+	Sleep(2000);
+	printf("Through endless peril and countless near death experiences, you and your family can now start a new life thousands of miles away from civilization\n");
+	Sleep(3000);
+	printf("The bravery of the pioneers are what have made them infamous in history\nThis game is celebrating that bravery\n");
+	Sleep(3000);
+	printf("I hope you have enjoyed Oregon Trail C Edition!\n");
+	Sleep(5000);
+	printf("Would you like to play again?");
+	scanf_s("%d", &playagain);
+	if (playagain == 1) {
+		system("cls");
+		mainmenu(1);
+	}
+	else if (playagain == 2) {
+		printf("Enjoy the rest of your day!");
+		Sleep(4000);
+	}
+}
+void credits() {
+	printf("################################\nThe Oregon Trail C Edition\n################################\n By: Sam Johnson\n");
+	Sleep(3000);
+	printf("Inspired by The Oregon Trail 1971 by MECC\n");
+	Sleep(2000);
+	printf("Original Creators:\n");
+	Sleep(1000);
+	printf("Don Rawitsch\n");
+	Sleep(1000);
+	printf("Bill Heinemann\n");
+	Sleep(1000);
+	printf("Paul Dillenberger\n");
+	Sleep(5000);
+	system("cls");
+	printf("Hope you enjoyed\n");
+	printf("....,       ,....\n.' ,,, '.   .' ,,, '.\n.`   `.     .`   `.\n: ..... :   : ..... :\n:`~'-'-`:   :`-'-'~`:\n `.~-`.'     `.~`'.'\n  ```   ___   ```\n     ( . . )\n       .._..\n     .'     '. \n    `.~~~~~~~.`\n      `-...-`\n");
+	Sleep(4000);
+	continue1();																										//Returns player back to the continue screen
+}
+//Everything Below has to do with randomized events and the generation of them
+void randomevent1() {
+	printf("You got disentery\n");
+	//printf("  #####                          #######                      \n #     #   ##   #    # ######    #     # #    # ###### #####  \n#        #  #  ##  ## #         #     # #    # #      #    # \n#  #### #    # # ## # #####     #     # #    # #####  #    # \n #     # ###### #    # #         #     # #    # #      ##### \n#     # #    # #    # #         #     #  #  #  #      #   #  \n#####  #    # #    # ######    #######   ##   ###### #    # \n");
+	Sleep(4000);
+	exitapp();
+}
+
+void randomevent2() {
+	printf("Your cart wheel broke off\n");
+	printf("Your trek screeches to a halt until it is fixed");
+	Sleep(1000);
+	printf(".");
+	Sleep(1000);
+	printf(".");
+	Sleep(1000);
+	printf(".");
+	Sleep(1000);
+	printf(".");
+	Sleep(1000);
+	printf(".");
+	Sleep(1000);
+	printf(".");
+	Sleep(1000);
+	printf(".");
+	Sleep(1000);
+	printf(".");
+	Sleep(1000);
+	printf(".");
+	Sleep(1000);
+	printf(".");
+	Sleep(1000);
+	printf(".");
+	Sleep(2000);
+	printf("The Wheel has been fixed!\n");
+	Sleep(3000);
+	mountain();
+}
+
+void randomevent3() {
+	printf("A good samaritan fed and housed you for the night\n");
+	Sleep(4000);
+	mountain();
+}
+
+void randomevent4() {
+	printf("Your were jumped by Cherokee huntsmen!\n");
+	Sleep(1000);
+	printf("You attempt to fend for yourself, but to no avail\n");
+	Sleep(2000);
+	printf("They kill your oxen, steal your supplies and leave you stranded\n");
+	Sleep(3000);
+	exitapp();
+}
+
+void randomevent5() {
+	printf("You found a shortcut! You get to skip the mountain!!\n");
+	Sleep(4000);
+	checkpoint1();
+}
+
+void randomevent6() {
+	printf("          ^^                   @@@@@@@@@\n      ^^       ^^            @@@@@@@@@@@@@@@\n                           @@@@@@@@@@@@@@@@@@              ^^\n                          @@@@@@@@@@@@@@@@@@@@\n~~~~ ~~ ~~~~~ ~~~~~~~~ ~~ &&&&&&&&&&&&&&&&&&&& ~~~~~~~ ~~~~~~~~~~~ ~~~\n");
+	printf("Your trail was peaceful and quiet\n");
+	Sleep(3000);
+	mountain();
+}
+
+void randomevent7() {
+	printf("             ____\n            { . .}\n            \  ---<\n             {  }\n   __________/ /\n-=:___________/\n");
+	printf("A Water Moccasin bit you!\n");
+	Sleep(4000);
+	exitapp();
+}
+
+void randomevent8() {
+	printf("You got lost. You ended up back at Independence\n");
+	Sleep(4000);
+	system("cls");
+	continue2();
+
+}
+
+void randomEventGenerator() {
+	int nMax = 8;												//Maximum int that can be generated is 8
+	int nMin = 1;												//Minimum int that can be generated it 1
+	srand(time(NULL));
+
+	int nRandonNumber = rand() % ((nMax + 1) - nMin) + nMin;	//Randomly allocates value to nRandomNumber Between 1 and 8
+	printf("%d\n", nRandonNumber);								//Prints Random Number
+	if (nRandonNumber == 1) {
+		//Each Event is allocated a value between 1 and 8
+		randomevent1();
+	}
+	else if (nRandonNumber == 2) {
+		randomevent2();
+	}
+	else if (nRandonNumber == 3) {
+		randomevent3();
+
+	}
+	else if (nRandonNumber == 4) {
+		randomevent4();
+
+	}
+	else if (nRandonNumber == 5) {
+		randomevent5();
+
+	}
+	else if (nRandonNumber == 6) {
+		randomevent6();
+
+	}
+	else if (nRandonNumber == 7) {
+		randomevent7();
+
+	}
+	else if (nRandonNumber == 8) {
+		randomevent8();
+
+	}
+	else {
+		exitapp();
+	}
+}
+void randomEventMountain1() {
+	printf("Your cart slips off the side of the mountain\n");
+	Sleep(2000);
+	exitapp();
+}
+
+void randomEventMountain2() {
+	printf("You find another pioneer! He helps guide you over the mountain!\n");
+	Sleep(4000);
+	checkpoint1();
+}
+void randomEventMountain3() {
+	printf("Your cart looses traction!\n");
+	Sleep(1000);
+	printf("You must start at the bottom of the mountain\n");
+	Sleep(4000);
+	system("cls");
+	mountain();
+}
+void randomEventMountain4() {
+	printf("You make the perilous journey up the mountain.\n");
+	Sleep(2000);
+	printf("You maintain your resolve and your wits\n");
+	Sleep(2000);
+	printf("Through wind and snow\n");
+	Sleep(2000);
+	printf("Over cracks and boulders\n");
+	Sleep(2000);
+	printf("You remain on the beaten path and make it over the mountain!\n");
+	Sleep(2000);
+	checkpoint1();
+}
+
+void randomEventGeneratorMountain() {
+	int nMax = 4;												//Maximum int that can be generated is 4
+	int nMin = 1;												//Minimum int that can be generated it 1
+	srand(time(NULL));
+
+	int nRandonNumber = rand() % ((nMax + 1) - nMin) + nMin;	//Randomly allocates value to nRandomNumber Between 1 and 4
+	printf("%d\n", nRandonNumber);								//Prints Random Number
+	if (nRandonNumber == 1) {
+		//Each Event is allocated a value between 1 and 4
+		randomEventMountain1();
+	}
+	else if (nRandonNumber == 2) {
+		randomEventMountain2();
+	}
+	else if (nRandonNumber == 3) {
+		randomEventMountain3();
+	}
+	else if (nRandonNumber == 4) {
+		randomEventMountain4();
+	}
+	else {
+		exitapp();
+	}
+}
+void randomEventBadlands1() {
+	printf("A rockslide catches you off gaurd\nYour cart is buried in a mountain of debris\n");
+	Sleep(3000);
+	checkpoint1deathscreen();
+}
+void randomEventBadlands2() {
+	printf("You accidentlly step on an active geyser\nThe lava hot water bursts up enveloping your cart and burning you alive!\n");
+	Sleep(3000);
+	checkpoint1deathscreen();
+}
+void randomEventBadlands3() {
+	printf("You remain upright and avoid the active threats around you\n");
+	Sleep(3000);
+	badlands2();
+}
+void randomEventBadlands4() {
+	printf("Your oxen use thier natural instict to avoid the dangerous terrain\n");
+	Sleep(3000);
+	badlands2();
+}
+void randomEventBadlands5() {
+	printf("Your oxen use thier natural instict to avoid the dangerous terrain\n");
+	Sleep(3000);
+	badlands2();
+}
+void randomEventGeneratorBadlands() {
+	int nMax = 5;												//Maximum int that can be generated is 5
+	int nMin = 1;												//Minimum int that can be generated it 1
+	srand(time(NULL));
+
+	int nRandonNumber = rand() % ((nMax + 1) - nMin) + nMin;	//Randomly allocates value to nRandomNumber Between 1 and 5
+	printf("%d\n", nRandonNumber);								//Prints Random Number
+	if (nRandonNumber == 1) {
+		//Each Event is allocated a value between 1 and 4
+		randomEventBadlands1();
+	}
+	else if (nRandonNumber == 2) {
+		randomEventBadlands2();
+	}
+	else if (nRandonNumber == 3) {
+		randomEventBadlands3();
+	}
+	else if (nRandonNumber == 4) {
+		randomEventBadlands4();
+	}
+	else if (nRandonNumber == 5) {
+		randomEventBadlands5();
+	}
+	else {
+		exitapp();
+	}
+}
+void randomEventCrackJump1() {
+	printf("You narrowly avoid the crumbling rocks as your oxen make the leap over the forming canyon\nYou safely make it over and continue running away from the calamity\n");
+	Sleep(4000);
+	desert();
+}
+void randomEventCrackJump2() {
+	printf("Your oxen could not see the canyon forming and fall right into the quake\n");
+	Sleep(4000);
+	checkpoint1deathscreen();
+}
+void randomEventCrackJump3() {
+	printf("Your oxen attempt to leap over the forming canyon!\nBut don't have enough speed to make it to the other side\n");
+	Sleep(4000);
+	checkpoint1deathscreen();
+}
+void randomEventGeneratorCrackJump() {
+	int nMax = 3;												//Maximum int that can be generated is 3
+	int nMin = 1;												//Minimum int that can be generated it 1
+	srand(time(NULL));
+
+	int nRandonNumber = rand() % ((nMax + 1) - nMin) + nMin;	//Randomly allocates value to nRandomNumber Between 1 and 3
+	printf("%d\n", nRandonNumber);								//Prints Random Number
+	if (nRandonNumber == 1) {
+		//Each Event is allocated a value between 1 and 8
+		randomEventCrackJump1();
+	}
+	else if (nRandonNumber == 2) {
+		randomEventCrackJump2();
+	}
+	else if (nRandonNumber == 3) {
+		randomEventCrackJump3();
+	}
+	else {
+		printf("Generation Failed");
+		exitapp();
+	}
+}
+void randomEventAroundCrack1() {
+	printf("You steer your steer to run parallel to the forming canyon\nYou successfuly avoid the calamity\n");
+	Sleep(3000);
+	desert();
+}
+void randomEventAroundCrack2() {
+	printf("You steer your steer to run parallel to the forming canyon\nYou successfuly avoid the calamity\n");
+	Sleep(3000);
+	desert();
+}
+void randomEventAroundCrack3() {
+	printf("You steer your steer to run parallel to the forming canyon\nYou successfuly avoid the calamity\n");
+	Sleep(3000);
+	desert();
+}
+void randomEventAroundCrack4() {
+	printf("You steer your steer to run parallel to the forming canyon\nyour oxen accidentally slip into the crack\n");
+	Sleep(3000);
+	checkpoint1deathscreen();
+}
+void randomEventGeneratorAroundCrack() {
+	int nMax = 4;												//Maximum int that can be generated is 4
+	int nMin = 1;												//Minimum int that can be generated it 1
+	srand(time(NULL));
+
+	int nRandonNumber = rand() % ((nMax + 1) - nMin) + nMin;	//Randomly allocates value to nRandomNumber Between 1 and 4
+	printf("%d\n", nRandonNumber);								//Prints Random Number
+	if (nRandonNumber == 1) {
+		//Each Event is allocated a value between 1 and 8
+		randomEventAroundCrack1();
+	}
+	else if (nRandonNumber == 2) {
+		randomEventAroundCrack2();
+	}
+	else if (nRandonNumber == 3) {
+		randomEventAroundCrack3();
+
+	}
+	else if (nRandonNumber == 4) {
+		randomEventAroundCrack4();
+
+	}
+	else {
+		printf("Generation Failiure");
+		Sleep(3000);
+		exitapp();
+	}
+}
+void randomEventMesa1() {
+	printf("The sun shines bright and hot as you make your way down the trail\n");
+	Sleep(3000);
+	printf("Though it is blistering hot, you continue onward\n");
+	Sleep(5000);
+	mesa2();
+}
+void randomEventMesa2() {
+	printf("Your oxen find a spring!\n");
+	Sleep(2000);
+	printf("You decide to take a breakand cool off in the spring\n");
+	Sleep(4000);
+	mesa2();
+}
+void randomEventMesa3() {
+	printf("You got disentary\n");
+	Sleep(5000);
+	checkpoint1deathscreen();
+}
+void randomEventMesa4() {
+	printf("You find some wild cactus bearing fruit\n");
+	Sleep(3000);
+	printf("You decide to take some for the road\n");
+	Sleep(4000);
+	mesa3();
+}
+void randomEventMesa5() {
+	printf("You find some wild cactus bearing fruit\n");
+	Sleep(3000);
+	printf("You decide to take some for the road\n");
+	Sleep(4000);
+	mesa3();
+}
+void randomEventGeneratorMesa1() {
+	int nMax = 2;												//Maximum int that can be generated is 2
+	int nMin = 1;												//Minimum int that can be generated it 1
+	srand(time(NULL));
+
+	int nRandonNumber = rand() % ((nMax + 1) - nMin) + nMin;	//Randomly allocates value to nRandomNumber Between 1 and 3
+	printf("%d\n", nRandonNumber);								//Prints Random Number
+	if (nRandonNumber == 1) {
+		//Each Event is allocated a value between 1 and 8
+		randomEventMesa1();
+	}
+	else if (nRandonNumber == 2) {
+		randomEventMesa2();
+	}
+}
+void randomEventGeneratorMesa2() {
+	int nMax = 3;												//Maximum int that can be generated is 3
+	int nMin = 1;												//Minimum int that can be generated it 1
+	srand(time(NULL));
+
+	int nRandonNumber = rand() % ((nMax + 1) - nMin) + nMin;	//Randomly allocates value to nRandomNumber Between 1 and 3
+	printf("%d\n", nRandonNumber);								//Prints Random Number
+	if (nRandonNumber == 1) {
+		//Each Event is allocated a value between 1 and 8
+		randomEventMesa3();
+	}
+	else if (nRandonNumber == 2) {
+		randomEventMesa4();
+	}
+	else if (nRandonNumber == 3) {
+		randomEventMesa5();
+	}
+}
+void randomEventStampede1() {
+	printf("You narrowly avoid the stampede\n");
+	Sleep(4000);
+	desert();
+}
+void randomEventStampede2() {
+	printf("Your oxen were too slow to avoid the stampede\n");
+	Sleep(4000);
+	checkpoint1deathscreen();
+}
+void randomEventStampede3() {
+	printf("As you wait behind the boulder you can hear the thunderous hooves of a thousand buffalo pass by\n");
+	Sleep(5000);
+	desert();
+}
+void randomEventStampede4() {
+	printf("As you wait behind the boulder you can hear the thunderous hooves of a thousand buffalo pass by\n");
+	Sleep(5000);
+	desert();
+}
+void randomEventStampede5() {
+	printf("As you wait behind the boulder you can hear the thunderous hooves of a thousand buffalo curve the boudler and trample your cart\n");
+	Sleep(6000);
+	checkpoint1deathscreen();
+}
+void randomEventGeneratorStampede1() {
+	int nMax = 2;												//Maximum int that can be generated is 2
+	int nMin = 1;												//Minimum int that can be generated it 1
+	srand(time(NULL));
+
+	int nRandonNumber = rand() % ((nMax + 1) - nMin) + nMin;	//Randomly allocates value to nRandomNumber Between 1 and 2
+	printf("%d\n", nRandonNumber);								//Prints Random Number
+	if (nRandonNumber == 1) {
+		//Each Event is allocated a value between 1 and 8
+		randomEventStampede1();
+	}
+	else if (nRandonNumber == 2) {
+		randomEventStampede2();
+	}
+}
+void randomEventGeneratorStampede2() {
+	int nMax = 3;												//Maximum int that can be generated is 2
+	int nMin = 1;												//Minimum int that can be generated it 1
+	srand(time(NULL));
+
+	int nRandonNumber = rand() % ((nMax + 1) - nMin) + nMin;	//Randomly allocates value to nRandomNumber Between 1 and 2
+	printf("%d\n", nRandonNumber);								//Prints Random Number
+	if (nRandonNumber == 1) {
+		//Each Event is allocated a value between 1 and 8
+		randomEventStampede3();
+	}
+	else if (nRandonNumber == 2) {
+		randomEventStampede4();
+	}
+	else if (nRandonNumber == 3) {
+		randomEventStampede5();
+	}
+}
+void randomEventRiverFord1() {
+	printf("The water becomes deep\nUp to the Ox's noses\n");
+	Sleep(2000);
+	printf("But you are able to ford the river!\n");
+	Sleep(4000);
+	checkpoint2();
+}
+void randomEventRiverFord2() {
+	printf("The water becomes deep\nUp to the Ox's noses\n");
+	Sleep(2000);
+	printf("But you are able to ford the river!\n");
+	Sleep(4000);
+	checkpoint2();
+}
+void randomEventRiverFord3() {
+	printf("The water becomes deep\nUp to the Ox's noses\n");
+	Sleep(2000);
+	printf("But you are able to ford the river!\n");
+	Sleep(4000);
+	checkpoint2();
+}
+void randomEventRiverFord4() {
+	printf("The water becomes deep\nUp to the Ox's noses\n");
+	Sleep(2000);
+	printf("The riverlife distracts your oxen, tipping over your cart and you are washed away by the current\n");
+	Sleep(4000);
+	checkpoint1deathscreen();
+}
+void randomEventGeneratorRiverFord() {
+	int nMax = 4;												//Maximum int that can be generated is 4
+	int nMin = 1;												//Minimum int that can be generated it 1
+	srand(time(NULL));
+
+	int nRandonNumber = rand() % ((nMax + 1) - nMin) + nMin;	//Randomly allocates value to nRandomNumber Between 1 and 4
+	printf("%d\n", nRandonNumber);								//Prints Random Number
+	if (nRandonNumber == 1) {
+		//Each Event is allocated a value between 1 and 8
+		randomEventRiverFord1();
+	}
+	else if (nRandonNumber == 2) {
+		randomEventRiverFord2();
+	}
+	else if (nRandonNumber == 3) {
+		randomEventRiverFord3();
+
+	}
+	else if (nRandonNumber == 4) {
+		randomEventRiverFord4();
+
+	}
+	else {
+		printf("Generation Failiure");
+		Sleep(3000);
+		exitapp();
+	}
+}
+void checkpoint1deathscreen() {
+	system("cls");
+	int checkpoint;
+	printf("You Have Died\nWould you like to continue at your checkpoint?\n1 = Yes\n2 = No\n");
+	scanf_s("%d", &checkpoint);
+	if (checkpoint == 1) {
+		checkpoint1();
+	}
+	else if (checkpoint == 2) {
+		exitapp();
+	}
+	else {
+		printf("Please pick 1 or 2");
+		checkpoint1deathscreen();
+	}
+}
+void exitapp() {
+	int playagain;
+	system("cls");												//clear console
+	printf(" #####                          #######                      \n#     #   ##   #    # ######    #     # #    # ###### #####  \n#        #  #  ##  ## #         #     # #    # #      #    # \n#  #### #    # # ## # #####     #     # #    # #####  #    # \n#     # ###### #    # #         #     # #    # #      ##### \n#     # #    # #    # #         #     #  #  #  #      #   #  \n #####  #    # #    # ######    #######   ##   ###### #    # \n");
+	Sleep(3000);
+	printf("Play Again?\nYes = 0 No = 1\n");
+	scanf_s("%d", &playagain);
+	if (playagain == 0) {										//sends you back to main menu
+		mainmenu(1);
+	}
+	else {														//ends code
+		printf("Ciao");
+		Sleep(2000);
+	}
+}
